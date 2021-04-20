@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock</title>
+  <style>
+      *,
+*::after,
+*::before{
+    box-sizing: border-box;
+    
+}
+
+
+body{
+    background:rgb(129, 55, 172);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.clock{
+    width: 300px;
+    height: 300px;
+    border: rgba(15, 3, 61, 0.781) solid 7px;
+    border-radius: 50%;
+    background-color: rgba(233, 92, 36, 0.801);
+    position: relative;
+}
+
+.clock .number{
+    --rotation:0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    transform: rotate(var(--rotation));
+    font-weight: bold;
+    font-size: 20px;
+    color:white;
+   
+   
+}
+
+.clock .number1{
+    --rotation:30deg;
+
+}
+
+.clock .number2{
+    --rotation:60deg;
+}
+
+.clock .number3{
+    --rotation:90deg;
+    
+}
+
+.clock .number4{
+    --rotation:120deg;
+}
+
+.clock .number5{
+    --rotation:150deg;
+    
+}
+
+.clock .number6{
+  
+    --rotation:180deg;
+}
+
+.clock .number7{
+    --rotation:210deg;
+    
+}
+
+.clock .number8{
+    --rotation:240deg;
+}
+
+.clock .number9{
+    --rotation:270deg;
+    
+}
+
+.clock .number10{
+    --rotation:300deg;
+}
+
+.clock .number11{
+    --rotation:330deg;
+    
+}
+
+.clock .hand{
+    --rotation:0;
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom;
+    transform: translateX(-50%) rotate(calc(var(--rotation) * 1deg));
+    border-top-left-radius: 40%;
+    border-top-right-radius: 40%;
+    z-index: 10;
+
+}
+
+.clock .hand.sec{
+  
+    width: 4px;
+    height: 43%;
+    background:rgb(139, 134, 134);
+}
+
+.clock .hand.hour{
+   
+    width: 10px;
+    height: 40%;
+    background:rgb(32, 2, 56);
+}
+
+.clock .hand.min{
+
+    width: 10px;
+    height: 43%;
+    background:rgb(32, 2, 56);
+}
+
+.clock::after{
+    content: '';
+    width: 15px;
+    height:15px ;
+    background: rgb(16, 202, 193);
+    border: solid 2px green;
+    position: absolute;
+    z-index: 11;
+    border-radius:50% ;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+.foot{
+         
+         top:90%;  
+         position: absolute;    
+            color: white;
+
+              }
+
+
+  </style>
+   
+</head>
+<body>
+
+
+         <div class=" clock">
+         <div class=" hand hour" data-hour-hand></div>
+         <div class="hand sec" id="se"></div>
+         <div class="hand min" id="mi"></div>
+
+         <div class="number number1">1</div>
+         <div class="number number2">2</div>
+         <div class="number number3">3</div>
+         <div class="number number4">4</div>
+         <div class="number number5">5</div>
+         <div class="number number6">6</div>
+         <div class="number number7">7</div>
+         <div class="number number8">8</div>
+         <div class="number number9">9</div>
+         <div class="number number10">10</div>
+         <div class="number number11">11</div>
+         <div class="number number12">12</div>
+
+
+
+         </div>
+         <div class="foot">
+            <p>Copyright @ 2021, Designed by Karthik</p>
+        </div>
+
+
+         <script >
+            setInterval(setClock ,1000);
+        
+        const secoundhand=document.getElementById('se');
+        console.log(secoundhand);
+        const minutehand=document.getElementById('mi');
+        const hourhand=document.querySelector('[data-hour-hand]');
+        
+        
+        function setClock(){
+          const  currentdate= new Date();
+        
+        const secoundsRatio=currentdate.getSeconds()/60;
+        console.log('secoundsRatio');
+        console.log(secoundsRatio);
+        const minutesRatio=(secoundsRatio+currentdate.getMinutes())/60; 
+        console.log('minutesRatio');
+        console.log(minutesRatio);
+        const hoursRatio=(minutesRatio+currentdate.getHours())/12;
+        console.log('hoursRatio');
+        console.log(hoursRatio);
+        setRotation(secoundhand,secoundsRatio);
+        setRotation(minutehand,minutesRatio);
+        setRotation(hourhand,hoursRatio);
+        
+        }
+        
+        
+        function setRotation(element,rotationratio){
+        element.style.setProperty("--rotation",rotationratio*360);
+        
+        }
+        
+        setClock();
+        
+        </script>
+
+</body>
+
+</html>
